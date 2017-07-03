@@ -1,23 +1,23 @@
 require 'rubygems'
-require 'glutton_ratelimit'
+require 'eh_glutton_ratelimit'
 
 class LimitInstanceMethods
   extend GluttonRatelimit
-    
+
   def initialize
     @start = Time.now
   end
-  
+
   def limit_me
     puts "#{Time.now - @start}"
     sleep 0.001
   end
-  
+
   def cap_me
     puts "#{Time.now - @start}"
     sleep 0.001
   end
-  
+
   rate_limit :limit_me, 6, 6
   rate_limit :cap_me, 6, 6, GluttonRatelimit::BurstyTokenBucket
 end

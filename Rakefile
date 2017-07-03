@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "glutton_ratelimit"
+    gem.name = "eh_glutton_ratelimit"
     gem.summary = %Q{Simple Ruby library for self-imposed rater-limiting.}
     gem.description = %Q{A Ruby library for limiting the number of times a method can be invoked within a specified time period.}
     gem.email = "stungeye@gmail.com"
-    gem.homepage = "http://github.com/stungeye/glutton_ratelimit"
+    gem.homepage = "https://github.com/Thinkei/eh_glutton_ratelimit"
     gem.authors = ["Wally Glutton"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
@@ -44,7 +44,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "glutton_ratelimit #{version}"
+  rdoc.title = "eh_glutton_ratelimit #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

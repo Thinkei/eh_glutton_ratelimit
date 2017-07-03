@@ -1,6 +1,6 @@
 # $LOAD_PATH << File.dirname(__FILE__) +'/../lib'
 require 'rubygems'
-require 'glutton_ratelimit'
+require 'eh_glutton_ratelimit'
 
 puts "Maximum of 12 executions every 5 seconds (Bursty):"
 rl = GluttonRatelimit::BurstyTokenBucket.new 12, 5
@@ -23,7 +23,7 @@ rl = GluttonRatelimit::AveragedThrottle.new 3, 3
 start = Time.now
 n = 0
 
-rl.times(7) do 
+rl.times(7) do
   puts "#{n += 1} - #{Time.now - start}"
   # Simulating a 0 to 1 second random-time task:
   sleep rand

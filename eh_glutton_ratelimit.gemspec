@@ -5,7 +5,7 @@
 # stub: glutton_ratelimit 0.2.1 ruby lib
 
 Gem::Specification.new do |s|
-  s.name = "glutton_ratelimit".freeze
+  s.name = "eh_glutton_ratelimit".freeze
   s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "examples/limit_instance_methods.rb",
     "examples/simple_manual.rb",
-    "glutton_ratelimit.gemspec",
+    "eh_glutton_ratelimit.gemspec",
     "lib/glutton_ratelimit.rb",
     "lib/glutton_ratelimit/averaged_throttle.rb",
     "lib/glutton_ratelimit/bursty_ring_buffer.rb",

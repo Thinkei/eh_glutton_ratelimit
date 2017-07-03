@@ -1,0 +1,21 @@
+machine:
+  ruby:
+    version: 2.2.2
+
+dependencies:
+  override:
+    - bundle install
+
+database:
+  override:
+    - echo "We don't need database setup"
+
+test:
+  override:
+    - bundle exec rake test
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - bundle exec ruby scripts/publish.rb

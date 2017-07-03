@@ -14,7 +14,7 @@ def timed_run ratelimiter, passes = 1
   ratelimiter.times(passes * ratelimiter.executions + 1) do
     before_last_invocation = Time.now
     yield
-  end 
+  end
   before_last_invocation - start_time
 end
 
