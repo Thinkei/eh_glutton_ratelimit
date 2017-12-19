@@ -40,7 +40,7 @@ module GluttonRatelimit
             tokens: @tokens,
             average_task_time: average_task_time
           }
-          raise GluttonSleepException.new('GluttonSleepException occured', params)
+          raise GluttonRatelimit::GluttonSleepException.new('GluttonSleepException occured', params)
         end
       end
       

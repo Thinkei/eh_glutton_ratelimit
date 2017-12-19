@@ -1,8 +1,10 @@
-class GluttonSleepException < StandardError
-  attr_reader :params
+module GluttonRatelimit
+  class GluttonSleepException < StandardError
+    attr_reader :params
 
-  def initialize(msg, params = {})
-    @params = params
-    super(msg)
+    def initialize(msg, params = {})
+      @params = params
+      super(msg)
+    end
   end
 end
