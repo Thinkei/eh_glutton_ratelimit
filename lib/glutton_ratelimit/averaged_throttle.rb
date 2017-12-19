@@ -29,8 +29,19 @@ module GluttonRatelimit
         sleep(remaining_time) if remaining_time > 0
         reset_bucket
       elsif executed_this_period != 0
-        throttle = (remaining_time.to_f + delta_since_previous) / (@tokens+1) - average_task_time
-        sleep throttle if throttle > 0
+        begin
+          throttle = (remaining_time.to_f + delta_since_previous) / (@tokens+1) - average_task_time
+          sleep throttle if throttle > 0
+        rescue RangeError
+          params = {
+            throttle: throttle,
+            remaining_time: remaining_time,
+            delta_since_previous: delta_since_previous,
+            tokens: @tokens,
+            average_task_time: average_task_time
+          }
+          raise GluttonSleepException.new('GluttonSleepException occured', params)
+        end
       end
       
       @tokens -= 1
