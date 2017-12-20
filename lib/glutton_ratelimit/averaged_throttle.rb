@@ -1,3 +1,5 @@
+require_relative 'glutton_sleep_exception'
+
 module GluttonRatelimit
   
   class AveragedThrottle < ParentLimiter
