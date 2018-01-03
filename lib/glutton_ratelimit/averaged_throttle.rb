@@ -36,11 +36,11 @@ module GluttonRatelimit
           sleep throttle if throttle > 0
         rescue RangeError
           params = {
-            throttle: throttle,
-            remaining_time: remaining_time,
-            delta_since_previous: delta_since_previous,
-            tokens: @tokens,
-            average_task_time: average_task_time
+            throttle: throttle.to_s,
+            remaining_time: remaining_time.to_s,
+            delta_since_previous: delta_since_previous.to_s,
+            tokens: @tokens.to_s,
+            average_task_time: average_task_time.to_s
           }
           raise GluttonRatelimit::GluttonSleepException.new('GluttonSleepException occured', params)
         end
