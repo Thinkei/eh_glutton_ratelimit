@@ -5,7 +5,9 @@ module GluttonRatelimit
     old_symbol = "#{symbol}_old".to_sym
     alias_method old_symbol, symbol
     define_method symbol do |*args|
-      rl.wait
+      use_glutton = !self.class.send(:can_use_throttle?)
+
+      rl.wait if use_glutton
       self.send old_symbol, *args
     end
   end
@@ -15,7 +17,9 @@ module GluttonRatelimit
     old_symbol = "#{symbol}_old".to_sym
     singleton_class.send(:alias_method, old_symbol, symbol)
     define_singleton_method symbol do |*args|
-      rl.wait
+      use_glutton = !send(:can_use_throttle?)
+
+      rl.wait if use_glutton
       self.send old_symbol, *args
     end
   end
@@ -39,6 +43,10 @@ module GluttonRatelimit
         yield
       end
     end
+  end
+
+  def can_use_throttle?
+    ENV['KEYPAY_THROTTLE_ALLOWED'] == 'true'
   end
 end
 
