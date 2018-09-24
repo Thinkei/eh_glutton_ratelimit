@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    eh_glutton_ratelimit (0.2.1)
+    eh_glutton_ratelimit (0.2.2)
       jeweler
       test-unit
 
@@ -37,12 +37,12 @@ GEM
       semver2
     jwt (1.5.6)
     mime-types (2.99.3)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
       jwt (~> 1.0)
@@ -68,4 +68,4 @@ DEPENDENCIES
   test-unit
 
 BUNDLED WITH
-   1.14.6
+   1.16.5
