@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  unit:
+    working_directory: ~/eh_glutton_ratelimit
+    parallelism: 1
+    docker:
+      - image: circleci/ruby:2.3.3
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - eh-bundler-{{ checksum "Gemfile.lock" }}
+            - eh-bundler
+      - run: bundle check || bundle install --path=vendor/bundle --jobs=4 --retry=3 --without development
+      - save_cache:
+          key: eh-bundler-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run: bundle exec rake test
+    # Deployment
+    # Your existing circle.yml file contains deployment steps.
+    # The config translation tool does not support translating deployment steps
+    # since deployment in CircleCI 2.0 are better handled through workflows.
+    # See the documentation for more information https://circleci.com/docs/2.0/workflows/
+    # Teardown
+    #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
+    # Save test results
+    # - store_test_results:
+    #     path: /tmp/circleci-test-results
+    # - store_artifacts:
+    #     path: /tmp/circleci-test-results
+  deploy:
+    working_directory: ~/eh_glutton_ratelimit
+    parallelism: 1
+    docker:
+      - image: circleci/ruby:2.3.3
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - eh-bundler-{{ checksum "Gemfile.lock" }}
+            - eh-bundler
+      - run: bundle check || bundle install --path=vendor/bundle --jobs=4 --retry=3 --without development
+      - save_cache:
+          key: eh-bundler-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run: bundle exec ruby scripts/publish.rb
+
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - unit:
+          context: org-global
+      - deploy:
+          context: org-global
+          filters:
+            branches:
+              only: master
+      - publish:
+          context: org-global
+          filters:
+            branches:
+              only: master
+          requires:
+            - unit
+            - deploy
