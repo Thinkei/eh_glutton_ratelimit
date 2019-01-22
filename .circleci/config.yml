@@ -29,7 +29,7 @@ jobs:
     #     path: /tmp/circleci-test-results
     # - store_artifacts:
     #     path: /tmp/circleci-test-results
-  deploy:
+  publish:
     working_directory: ~/eh_glutton_ratelimit
     parallelism: 1
     docker:
@@ -53,11 +53,6 @@ workflows:
     jobs:
       - unit:
           context: org-global
-      - deploy:
-          context: org-global
-          filters:
-            branches:
-              only: master
       - publish:
           context: org-global
           filters:
@@ -65,4 +60,3 @@ workflows:
               only: master
           requires:
             - unit
-            - deploy
